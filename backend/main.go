@@ -4,6 +4,7 @@ import (
 	"flag"
 	"log"
 	"net/http"
+	"strings"
 
 	"github.com/dma23/Valo-Pictionary/backend/game"
 	"github.com/gorilla/websocket"
@@ -125,13 +126,32 @@ func (c *Client) writePump() {
 }
 
 func main() {
+
 	flag.Parse()
 
 	hub := newHub()
 	go hub.run()
 
-	fs := http.FileServer(http.Dir("../frontend"))
-	http.Handle("/", fs)
+	fileServer := http.FileServer(http.Dir("../frontend"))
+
+	// Create a custom handler to prevent directory listing
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		// If the path ends with /, but it's not the root path
+		if strings.HasSuffix(r.URL.Path, "/") && r.URL.Path != "/" {
+			// Redirect to the base URL for security
+			http.Redirect(w, r, "/", http.StatusMovedPermanently)
+			return
+		}
+
+		// If we're at the root path, serve index.html
+		if r.URL.Path == "/" {
+			http.ServeFile(w, r, "../frontend/index.html")
+			return
+		}
+
+		// For all other requests, serve the requested file
+		fileServer.ServeHTTP(w, r)
+	})
 
 	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
 		serveWs(hub, w, r)
