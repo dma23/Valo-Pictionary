@@ -1,0 +1,338 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ddd;
+}
+
+h1, h2, h3 {
+    color: #2c3e50;
+}
+
+.btn {
+    padding: 8px 16px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #2980b9;
+}
+
+.screen {
+    display: none;
+    margin-top: 20px;
+}
+
+.screen.active {
+    display: block;
+}
+
+/* Join Screen */
+#joinScreen {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Lobby Screen */
+#lobbyScreen {
+    text-align: center;
+}
+
+#playersList {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#playersList ul {
+    list-style-type: none;
+}
+
+#playersList li {
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+}
+
+/* Game Screen */
+.game-container {
+    display: flex;
+    gap: 20px;
+}
+
+.drawing-area {
+    flex: 2;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+}
+
+#wordDisplay {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    height: 30px;
+}
+
+#drawingCanvas {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    display: block;
+    margin: 0 auto;
+}
+
+#drawingTools {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.color-picker, .line-width {
+    display: flex;
+    gap: 5px;
+}
+
+.color-btn {
+    width: 30px;
+    height: 30px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.color-btn.selected {
+    border-color: #333;
+}
+
+.color-btn.black { background-color: black; }
+.color-btn.red { background-color: red; }
+.color-btn.green { background-color: green; }
+.color-btn.blue { background-color: blue; }
+.color-btn.yellow { background-color: yellow; }
+
+.size-btn {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: white;
+    position: relative;
+}
+
+.size-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: black;
+    border-radius: 50%;
+}
+
+.size-btn.small::after {
+    width: 2px;
+    height: 2px;
+}
+
+.size-btn.medium::after {
+    width: 5px;
+    height: 5px;
+}
+
+.size-btn.large::after {
+    width: 10px;
+    height: 10px;
+}
+
+.size-btn.selected {
+    border-color: #333;
+}
+
+.game-sidebar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.scoreboard, .chat-area {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+}
+
+.scoreboard h3, .chat-area h3 {
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+#scoreList {
+    list-style-type: none;
+}
+
+#scoreList li {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.chat-area {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+#chatMessages {
+    flex-grow: 1;
+    min-height: 200px;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+}
+
+.chat-input {
+    display: flex;
+    gap: 5px;
+}
+
+.chat-input input {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.message {
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.system-message {
+    background-color: #f0f0f0;
+    color: #666;
+    font-style: italic;
+}
+
+.player-message {
+    background-color: #e3f2fd;
+}
+
+.correct-guess {
+    background-color: #c8e6c9;
+    font-weight: bold;
+}
+
+/* Round End & Game End Screens */
+#roundEndScreen, #gameEndScreen {
+    text-align: center;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#revealedWord {
+    font-weight: bold;
+    font-size: 24px;
+    color: #2c3e50;
+}
+
+#roundScores, #finalScores {
+    margin-top: 20px;
+}
+
+#roundScores div, #finalScores div {
+    padding: 5px;
+    margin: 5px 0;
+    border-bottom: 1px solid #eee;
+}
+
+#newGameButton {
+    margin-top: 20px;
+}
+
+#gameInfo {
+    display: flex;
+    gap: 20px;
+}
+
+#timerDisplay {
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .game-container {
+        flex-direction: column;
+    }
+    
+    #drawingCanvas {
+        width: 100%;
+        height: auto;
+    }
+}

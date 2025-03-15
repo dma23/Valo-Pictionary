@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pictionary Game</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Pictionary</h1>
+            <div id="gameInfo">
+                <span id="roundInfo">Round: <span id="currentRound">0</span>/<span id="maxRounds">3</span></span>
+                <span id="timerDisplay">Time: <span id="timer">60</span>s</span>
+            </div>
+        </header>
+
+        <div id="joinScreen" class="screen active">
+            <h2>Join Game</h2>
+            <div class="form-group">
+                <label for="playerName">Your Name:</label>
+                <input type="text" id="playerName" placeholder="Enter your name">
+            </div>
+            <button id="joinButton" class="btn">Join Game</button>
+        </div>
+
+        <div id="lobbyScreen" class="screen">
+            <h2>Waiting for Players</h2>
+            <div id="playersList">
+                <h3>Players</h3>
+                <ul id="playersConnected"></ul>
+            </div>
+            <button id="startButton" class="btn">Start Game</button>
+        </div>
+
+        <div id="gameScreen" class="screen">
+            <div class="game-container">
+                <div class="drawing-area">
+                    <div id="wordDisplay"></div>
+                    <canvas id="drawingCanvas" width="600" height="400"></canvas>
+                    <div id="drawingTools">
+                        <div class="color-picker">
+                            <button class="color-btn black selected" data-color="#000"></button>
+                            <button class="color-btn red" data-color="#F00"></button>
+                            <button class="color-btn green" data-color="#0F0"></button>
+                            <button class="color-btn blue" data-color="#00F"></button>
+                            <button class="color-btn yellow" data-color="#FF0"></button>
+                        </div>
+                        <div class="line-width">
+                            <button class="size-btn small" data-size="2"></button>
+                            <button class="size-btn medium selected" data-size="5"></button>
+                            <button class="size-btn large" data-size="10"></button>
+                        </div>
+                        <button id="clearButton" class="btn">Clear</button>
+                    </div>
+                </div>
+                <div class="game-sidebar">
+                    <div class="scoreboard">
+                        <h3>Scoreboard</h3>
+                        <ul id="scoreList"></ul>
+                    </div>
+                    <div class="chat-area">
+                        <div id="chatMessages"></div>
+                        <div class="chat-input">
+                            <input type="text" id="guessInput" placeholder="Type your guess here...">
+                            <button id="sendGuess" class="btn">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="roundEndScreen" class="screen">
+            <h2>Round Ended</h2>
+            <div id="roundSummary">
+                <p>The word was: <span id="revealedWord"></span></p>
+                <div id="roundScores"></div>
+            </div>
+        </div>
+
+        <div id="gameEndScreen" class="screen">
+            <h2>Game Over</h2>
+            <div id="finalScores"></div>
+            <button id="newGameButton" class="btn">New Game</button>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
