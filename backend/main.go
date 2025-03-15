@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/dma23/Valo-Pictionary/game"
+	"github.com/dma23/Valo-Pictionary/backend/game"
 	"github.com/gorilla/websocket"
 )
 
